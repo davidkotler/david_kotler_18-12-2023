@@ -1,0 +1,48 @@
+.fiveDayDIsplayCard {
+    background-color: #f2f2f2;
+    
+   
+    display: flex;
+    flex-direction: column;
+}
+
+.upperCardDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.lowerCardDiv {
+    display: flex;
+    flex-direction: row; /* Corrected from column to row */
+    justify-content: space-evenly;
+    margin-top: -4px;
+    }
+
+.innerRightCardDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    align-items:self-start;
+    margin-bottom: 50px;
+}
+
+.innerLeftCardDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 50px;
+    align-items: flex-start;
+    
+}
+
+.lowestCardDiv {
+    height: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
