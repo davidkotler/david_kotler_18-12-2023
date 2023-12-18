@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/david_kotler_18-12-2023/static/css/main.a53243ef.css",
+    "main.js": "/david_kotler_18-12-2023/static/js/main.ed34318d.js",
+    "static/js/787.38f16daf.chunk.js": "/david_kotler_18-12-2023/static/js/787.38f16daf.chunk.js",
+    "index.html": "/david_kotler_18-12-2023/index.html",
+    "main.a53243ef.css.map": "/david_kotler_18-12-2023/static/css/main.a53243ef.css.map",
+    "main.ed34318d.js.map": "/david_kotler_18-12-2023/static/js/main.ed34318d.js.map",
+    "787.38f16daf.chunk.js.map": "/david_kotler_18-12-2023/static/js/787.38f16daf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a53243ef.css",
+    "static/js/main.ed34318d.js"
+  ]
+}
