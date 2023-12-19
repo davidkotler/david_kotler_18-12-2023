@@ -5,7 +5,7 @@ const ErrorPage = () => {
   return (
     <div className="error-container">
       <div className="error-content">
-        <h1>Oops! Something went wrong.</h1>
+        <h1>HTTP Error !!!</h1>
         <p>Please try again later or contact support.</p>
       </div>
     </div>
