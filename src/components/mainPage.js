@@ -17,29 +17,33 @@ import { getCurrentDayWeather } from "../services/weatherApi";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocationName } from "../redux/slices/locationSlice";
+import { setUpdateTime } from "../redux/slices/updateTimeSlice";
+import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
 
 function MainPage() {
   const [weatherDetails, setWeatherDetails] = useState([]);
-  const [currentDayDetails, setCurrentDayDetails] = useState("");
+  // const [currentDayDetails, setCurrentDayDetails] = useState("");
   const [locationId, setLocationId] = useState(defaultAreaId);
-  const [searchedLocationName, setSearchedLocationName] = useState("Haifa");
+  const [searchedLocationName, setSearchedLocationName] = useState("");
   const [matchedLocations, setMatchedLocations] = useState([]);
   const [generate, setGenerate] = useState(false);
-
-  const locationName = useSelector((state) => state.locationName.value);
+  const [locationName, setLocationName] = useState("Tel Aviv");
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   //get deafult area details
-  //   async function getcurrentDay() {
-  //     const details = await getCurrentDayWeather(locationId);
-  //     setCurrentDayDetails(details);
 
-  //     const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
+  useEffect(() => {
+    //get deafult area details
+    async function getcurrentDay() {
+      const details = await getCurrentDayWeather(locationId);
+      // setCurrentDayDetails(details);
+      dispatch(setCurrentDayDetails(details));
+      dispatch(setUpdateTime(new Date().toLocaleTimeString()));
 
-  //     setWeatherDetails(response);
-  //   }
-  //   getcurrentDay();
-  // }, [generate]);
+      const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
+
+      setWeatherDetails(response);
+    }
+    getcurrentDay();
+  }, [generate]);
 
   // const values = [
   //   {
@@ -76,10 +80,13 @@ function MainPage() {
 
   async function handleGetWeather(getForecast) {
     const matches = await getAutocompleteSearch(locationName);
+    console.log(matches);
     if (matches) {
-      const matchedNames = matches.map((location) => {
-        return { name: location.LocalizedName, id: location.Key };
-      });
+      const matchedNames = matches.map((location) => ({
+        id: location.Key,
+        name: location.LocalizedName,
+      }));
+      // const matchedNames = matches.map((location) => location.LocalizedName);
       setMatchedLocations(matchedNames);
       setLocationId(matches[0].Key);
     }
@@ -94,7 +101,7 @@ function MainPage() {
 
   const handleInputChange = (event) => {
     //handle & fetch all the locations that match the search
-    // setLocationName(event.target.value);
+
     dispatch(setLocationName(event.target.value));
   };
   //   console.log(locationName);
@@ -113,22 +120,34 @@ function MainPage() {
           style={{ width: 300, marginTop: 13 }}
           id="controlled-demo"
           options={matchedLocations}
-          getOptionLabel={(location) => location.name}
+          getOptionLabel={(location) => (location.name ? location.name : "")}
           value={{ name: locationName }}
           onInputChange={(event, newValue) => {
-            dispatch(setLocationName(newValue));
+            setLocationName(newValue);
+            // dispatch(setLocationName(newValue));
             handleGetWeather(false);
           }}
           onChange={(event, newValue) => {
-            // handleGetWeather(true);
-            setSearchedLocationName(newValue);
+            //handleGetWeather(true);
+            // dispatch(setLocationName(newValue));
+            if (newValue) {
+              setLocationName(newValue.name);
+            }
           }}
-          renderInput={(params) => <TextField {...params} variant="standard" />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              placeholder="Type to search..."
+              variant="standard"
+            />
+          )}
         />
 
         <Button
           sx={{ backgroundColor: "#7400b8" }}
           onClick={() => {
+            // dispatch(setLocationName(searchedLocationName));
+
             handleGetWeather(true);
           }}
         >
@@ -136,10 +155,17 @@ function MainPage() {
         </Button>
       </div>
       <div className="midDiv">
-        <CurrentDayWeather currentDayDetails={currentDayDetails} />
+        <CurrentDayWeather
+          locationId={locationId}
+          locationName={locationName}
+        />
       </div>
       <div>
-        <WeatherDisplay locationId={locationId} apiResponse={weatherDetails} />
+        <WeatherDisplay
+          locationId={locationId}
+          apiResponse={weatherDetails}
+          locationName={locationName}
+        />
       </div>
       <div>
         <h1>create by: David Kotler</h1>

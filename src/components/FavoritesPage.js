@@ -33,11 +33,16 @@ const FavoritesPage = () => {
           {favorites.map((favorite, index) => (
             <Card key={index} className="favoritesCard">
               <CardContent className="favoritesCardContent">
-                <h2>{favorite.locationName}</h2>
+                <CardContent>
+                  <h2>{favorite.locationName}</h2>
+                </CardContent>
+
                 <CardContent>
                   <Typography variant="body1">
                     Temperature: {favorite.temperature}°C
                   </Typography>
+                </CardContent>
+                <CardContent>
                   <Typography variant="body1">
                     Weather: {favorite.weatherText}
                   </Typography>

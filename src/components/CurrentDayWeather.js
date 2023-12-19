@@ -13,17 +13,48 @@ import Alert from "@mui/material/Alert";
 import StarIcon from "@mui/icons-material/Star";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function CurrentDayWeather({ locationId, currentDayDetails }) {
-  const locationName = useSelector((state) => state.locationName.value);
-  // if (!currentDayDetails || currentDayDetails.length === 0) {
-  //   /// ADD THIS WHEN FINISH !!! IT WORKS JUST MAKE AN API CALLS
-  //   //check if the details not available
-  //   return (
-  //     <div>
-  //       <h1>Data not available right now !</h1>
-  //     </div>
-  //   );
-  // }
+export default function CurrentDayWeather({ locationId, locationName }) {
+  // const locationName = useSelector((state) => state.locationName.value);
+  const updateTime = useSelector((state) => state.updateTime.value);
+  const currentDayDetails = useSelector(
+    (state) => state.currentDayDetails.value
+  );
+
+  if (!currentDayDetails || currentDayDetails.length === 0) {
+    /// ADD THIS WHEN FINISH !!! IT WORKS JUST MAKE AN API CALLS
+    //check if the details not available
+    return (
+      <div>
+        <h1>Data not available right now !</h1>
+      </div>
+    );
+  }
+  // const currentDayDetails = [
+  //   {
+  //     LocalObservationDateTime: "2023-12-14T17:32:00+02:00",
+  //     EpochTime: 1702567920,
+  //     WeatherText: "Partly sunny",
+  //     WeatherIcon: 35,
+  //     HasPrecipitation: false,
+  //     PrecipitationType: null,
+  //     IsDayTime: false,
+  //     Temperature: {
+  //       Metric: {
+  //         Value: 20,
+  //         Unit: "C",
+  //         UnitType: 17,
+  //       },
+  //       Imperial: {
+  //         Value: 68,
+  //         Unit: "F",
+  //         UnitType: 18,
+  //       },
+  //     },
+  //     MobileLink:
+  //       "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
+  //     Link: "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
+  //   },
+  // ];
 
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const handleAddToFavorites = () => {
@@ -50,32 +81,6 @@ export default function CurrentDayWeather({ locationId, currentDayDetails }) {
     }
   };
 
-  currentDayDetails = [
-    {
-      LocalObservationDateTime: "2023-12-14T17:32:00+02:00",
-      EpochTime: 1702567920,
-      WeatherText: "Partly sunny",
-      WeatherIcon: 35,
-      HasPrecipitation: false,
-      PrecipitationType: null,
-      IsDayTime: false,
-      Temperature: {
-        Metric: {
-          Value: 20,
-          Unit: "C",
-          UnitType: 17,
-        },
-        Imperial: {
-          Value: 68,
-          Unit: "F",
-          UnitType: 18,
-        },
-      },
-      MobileLink:
-        "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
-      Link: "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
-    },
-  ];
   const weatherText = currentDayDetails[0].WeatherText.toLowerCase();
   let weatherIcon;
 
@@ -101,7 +106,7 @@ export default function CurrentDayWeather({ locationId, currentDayDetails }) {
             ).toLocaleDateString()}
           </Typography>
           <Typography style={{ color: "#6930c3" }}>
-            updated at: today
+            updated at: {updateTime}
           </Typography>
         </CardContent>
         <CardContent className="middleInnerContent">
@@ -110,15 +115,8 @@ export default function CurrentDayWeather({ locationId, currentDayDetails }) {
           </h2>
         </CardContent>
         <CardContent className="rightInnerContent">
-          <Card
-            className="innerCard"
-            variant="solid"
-            sx={{
-              backgroundColor: "#ddd5f3",
-            }}
-          >
+          <Card className="innerCard" variant="solid">
             <CardContent orientation="horizontal">
-              {/* <Typography>{isCloudy ? cloudyIcon : sunnyIcon}</Typography> */}
               <Typography>{weatherIcon}</Typography>
             </CardContent>
             <CardContent
@@ -142,7 +140,9 @@ export default function CurrentDayWeather({ locationId, currentDayDetails }) {
             marginRight: "auto",
             marginTop: "5px",
             marginRight: "5px",
-            fontSize: 30,
+            stroke: "yellow",
+            strokeWidth: 1,
+            fontSize: 50,
           }}
         />
       </Card>

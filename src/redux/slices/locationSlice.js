@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const counterSlice = createSlice({
   name: "locationName",
   initialState: {
-    value: "haifa",
+    value: "Tel Aviv",
   },
 
   reducers: {
@@ -13,7 +13,6 @@ export const counterSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setLocationName } = counterSlice.actions;
 
 export default counterSlice.reducer;

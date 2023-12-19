@@ -3,9 +3,9 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 
 export const apiUrl = "http://dataservice.accuweather.com";
-export const apiKey = "uGaxZEVwWDzY11HuXgT8LPfCpDDR3JYI";
-// export const apiKey = "kUriycj9Nd4CxCKftcouKKGJdyHnulUd";
-export const defaultAreaId = 213181;
+// export const apiKey = "uGaxZEVwWDzY11HuXgT8LPfCpDDR3JYI";
+export const apiKey = "kUriycj9Nd4CxCKftcouKKGJdyHnulUd";
+export const defaultAreaId = 215854;
 
 export const sunnyIcon = (
   <WbSunnyIcon color="secondary" style={{ fontSize: 100, color: "yellow" }} />
