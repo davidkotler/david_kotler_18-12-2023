@@ -30,20 +30,20 @@ function MainPage() {
   const [locationName, setLocationName] = useState("Tel Aviv");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    //get deafult area details
-    async function getcurrentDay() {
-      const details = await getCurrentDayWeather(locationId);
-      // setCurrentDayDetails(details);
-      dispatch(setCurrentDayDetails(details));
-      dispatch(setUpdateTime(new Date().toLocaleTimeString()));
+  // useEffect(() => {
+  //   //get deafult area details
+  //   async function getcurrentDay() {
+  //     const details = await getCurrentDayWeather(locationId);
+  //     // setCurrentDayDetails(details);
+  //     dispatch(setCurrentDayDetails(details));
+  //     dispatch(setUpdateTime(new Date().toLocaleTimeString()));
 
-      const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
+  //     const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
 
-      setWeatherDetails(response);
-    }
-    getcurrentDay();
-  }, [generate]);
+  //     setWeatherDetails(response);
+  //   }
+  //   getcurrentDay();
+  // }, [generate]);
 
   // const values = [
   //   {
@@ -154,20 +154,21 @@ function MainPage() {
           Search
         </Button>
       </div>
-      <div className="midDiv">
-        <CurrentDayWeather
-          locationId={locationId}
-          locationName={locationName}
-        />
-      </div>
       <div>
-        <WeatherDisplay
-          locationId={locationId}
-          apiResponse={weatherDetails}
-          locationName={locationName}
-        />
-      </div>
-      <div>
+        <div className="midDiv">
+          <CurrentDayWeather
+            locationId={locationId}
+            locationName={locationName}
+          />
+        </div>
+        <div>
+          <WeatherDisplay
+            locationId={locationId}
+            apiResponse={weatherDetails}
+            locationName={locationName}
+          />
+        </div>
+
         <h1>create by: David Kotler</h1>
       </div>
     </div>

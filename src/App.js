@@ -3,14 +3,22 @@ import "./App.css";
 import MainPage from "./components/mainPage";
 import NavBar from "./components/NavBar";
 import AppRouter from "./AppRouter";
-
+import ErrorHandler from "./components/ErrorHandler";
 function App() {
-  return (
-    <div>
-      <NavBar />
-      {/* <MainPage /> */}
+  const [isDark, setIsDark] = useState(false);
 
-      <AppRouter />
+  const handleIsDark = () => {
+    setIsDark(!isDark);
+  };
+
+  return (
+    <div className="App" data-theme={isDark ? "dark" : "light"}>
+      <ErrorHandler>
+        <NavBar changeTheme={handleIsDark} />
+        {/* <MainPage /> */}
+
+        <AppRouter />
+      </ErrorHandler>
     </div>
   );
 }

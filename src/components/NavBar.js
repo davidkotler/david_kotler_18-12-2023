@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-export default function NavBar() {
+export default function NavBar({ changeTheme }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: "#ffffff" }}>
@@ -23,7 +23,7 @@ export default function NavBar() {
           >
             Weather App
           </Typography>
-          <Switch />
+          <Switch onChange={changeTheme} />
 
           <Button
             component={Link}

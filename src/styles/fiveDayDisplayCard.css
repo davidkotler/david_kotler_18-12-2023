@@ -1,12 +1,13 @@
 .fiveDayDIsplayCard {
-    background-color: #f2f2f2;
-    
+    /* background-color: #f2f2f2; */
+    /* background-color: var(--background-color); */
    
     display: flex;
     flex-direction: column;
 }
 
 .upperCardDiv {
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +15,7 @@
 }
 
 .lowerCardDiv {
+    
     display: flex;
     flex-direction: row; /* Corrected from column to row */
     justify-content: space-evenly;
