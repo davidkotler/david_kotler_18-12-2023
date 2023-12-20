@@ -17,7 +17,6 @@ export async function fetchAllData(path, locationId) {
 
     return data;
   } catch (error) {
-    localStorage.setItem("error", JSON.stringify(error));
     window.location.href = "/error";
   }
 }
