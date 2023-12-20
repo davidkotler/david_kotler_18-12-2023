@@ -2,7 +2,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import CloudIcon from "@mui/icons-material/Cloud";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 
-export const apiUrl = "http://dataservice.accuweather.com";
+export const apiUrl = "https://dataservice.accuweather.com";
 // export const apiKey = "uGaxZEVwWDzY11HuXgT8LPfCpDDR3JYI";
 
 export const apiKey = "AAMnwducHSbwpkxD3DqMpPh4ilLpLfUo";
