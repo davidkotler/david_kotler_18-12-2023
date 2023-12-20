@@ -32,11 +32,11 @@ function MainPage() {
     //get deafult area details
     async function getcurrentDay() {
       const details = await getCurrentDayWeather(locationId);
-      // setCurrentDayDetails(details);
+
       dispatch(setCurrentDayDetails(details));
       dispatch(setUpdateTime(new Date().toLocaleTimeString()));
 
-      const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
+      const response = await getFiveDaysForCast(locationId);
 
       setWeatherDetails(response);
     }
