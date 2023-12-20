@@ -12,6 +12,7 @@ import "../styles/fiveDayDisplayCard.css";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import { useSelector, useDispatch } from "react-redux";
+import { daysOfWeek } from "../settings";
 
 export default function WeatherDisplay({ apiResponse, locationName }) {
   // const locationName = useSelector((state) => state.locationName.value);
@@ -204,22 +205,27 @@ export default function WeatherDisplay({ apiResponse, locationName }) {
     >
       {dailyForecasts.map((forecast, index) => (
         <div key={index}>
-          <Card className="fiveDayDIsplayCard" sx={{ width: 250, height: 285 }}>
+          <Card className="fiveDayDIsplayCard" sx={{ width: 250, height: 323 }}>
             <CardContent className="upperCardDiv">
-              <h3>{locationName}</h3>
+              <h2>{locationName}</h2>
+              <Typography>
+                {daysOfWeek[new Date(forecast.Date).getDay()]}
+              </Typography>
               <Typography level="body-sm">
                 {new Date(forecast.Date).toLocaleDateString()}
               </Typography>
             </CardContent>
             <div className="lowerCardDiv">
               <div className="innerLeftCardDiv">
-                <WbSunnyIcon />
+                {/* <WbSunnyIcon /> */}
+                <h4>Day</h4>
                 <Typography fontSize="lg" fontWeight="lg">
                   {forecast.Day.IconPhrase}
                 </Typography>
               </div>
               <div className="innerRightCardDiv">
-                <BedtimeIcon />
+                {/* <BedtimeIcon /> */}
+                <h4>Night</h4>
                 <Typography fontSize="lg" fontWeight="lg">
                   {forecast.Night.IconPhrase}
                 </Typography>

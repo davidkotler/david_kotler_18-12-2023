@@ -86,7 +86,6 @@ function MainPage() {
         id: location.Key,
         name: location.LocalizedName,
       }));
-      // const matchedNames = matches.map((location) => location.LocalizedName);
       setMatchedLocations(matchedNames);
       setLocationId(matches[0].Key);
     }
@@ -99,20 +98,6 @@ function MainPage() {
     }
   }
 
-  const handleInputChange = (event) => {
-    //handle & fetch all the locations that match the search
-
-    dispatch(setLocationName(event.target.value));
-  };
-  //   console.log(locationName);
-  //   // const matches = getAutocompleteSearch(locationName);
-  //   const matches = values;
-  //   const matchedNames = matches.map((location) => location.LocalizedName);
-  //   setMatchedLocations(matchedNames);
-
-  //   console.log(matchedNames);
-  // };
-
   return (
     <div className="container">
       <div className="upperDiv" spacing={1} sx={{ width: 300 }}>
@@ -121,9 +106,9 @@ function MainPage() {
           id="controlled-demo"
           options={matchedLocations}
           getOptionLabel={(location) => (location.name ? location.name : "")}
-          value={{ name: locationName }}
+          value={{ name: searchedLocationName }}
           onInputChange={(event, newValue) => {
-            setLocationName(newValue);
+            setSearchedLocationName(newValue);
             // dispatch(setLocationName(newValue));
             handleGetWeather(false);
           }}
@@ -131,7 +116,7 @@ function MainPage() {
             //handleGetWeather(true);
             // dispatch(setLocationName(newValue));
             if (newValue) {
-              setLocationName(newValue.name);
+              setSearchedLocationName(newValue.name);
             }
           }}
           renderInput={(params) => (
@@ -139,6 +124,9 @@ function MainPage() {
               {...params}
               placeholder="Type to search..."
               variant="standard"
+              InputProps={{
+                style: { borderBottom: "2px solid #7400b8", color: "#7400b8" },
+              }}
             />
           )}
         />
@@ -147,7 +135,7 @@ function MainPage() {
           sx={{ backgroundColor: "#7400b8" }}
           onClick={() => {
             // dispatch(setLocationName(searchedLocationName));
-
+            setLocationName(searchedLocationName);
             handleGetWeather(true);
           }}
         >
@@ -161,15 +149,13 @@ function MainPage() {
             locationName={locationName}
           />
         </div>
-        <div>
+        <div className="lowDiv">
           <WeatherDisplay
             locationId={locationId}
             apiResponse={weatherDetails}
             locationName={locationName}
           />
         </div>
-
-        <h1>create by: David Kotler</h1>
       </div>
     </div>
   );

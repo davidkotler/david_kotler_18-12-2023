@@ -12,6 +12,7 @@ import ThermostatIcon from "@mui/icons-material/Thermostat";
 import Alert from "@mui/material/Alert";
 import StarIcon from "@mui/icons-material/Star";
 import { useSelector, useDispatch } from "react-redux";
+import { daysOfWeek } from "../settings";
 
 export default function CurrentDayWeather({ locationId, locationName }) {
   // const locationName = useSelector((state) => state.locationName.value);
@@ -29,6 +30,7 @@ export default function CurrentDayWeather({ locationId, locationName }) {
   //     </div>
   //   );
   // }
+
   const currentDayDetails = [
     {
       LocalObservationDateTime: "2023-12-14T17:32:00+02:00",
@@ -89,10 +91,8 @@ export default function CurrentDayWeather({ locationId, locationName }) {
   } else if (weatherText.includes("cloud")) {
     weatherIcon = cloudyIcon;
   } else if (weatherText.includes("rain")) {
-    // Assuming you have a rain icon
     weatherIcon = rainyIcon;
   } else {
-    // Default to a generic icon if none of the above conditions are met
     weatherIcon = sunnyIcon;
   }
   return (
@@ -100,6 +100,13 @@ export default function CurrentDayWeather({ locationId, locationName }) {
       <Card className="card" variant="solid" invertedColors>
         <CardContent className="leftInnerContent">
           <h1 style={{ color: "#6930c3" }}>{locationName}</h1>
+          <Typography style={{ color: "#6930c3" }}>
+            {
+              daysOfWeek[
+                new Date(currentDayDetails[0].LocalObservationDateTime).getDay()
+              ]
+            }
+          </Typography>
           <Typography style={{ color: "#6930c3" }}>
             {new Date(
               currentDayDetails[0].LocalObservationDateTime

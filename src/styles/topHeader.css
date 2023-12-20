@@ -7,10 +7,6 @@
 }
 
 .upperDiv {
-    /* background-image: url("C:\\Users\\david_k\\Downloads\\coast-8308438_1280.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
     
     display: flex;
     flex: 1;
@@ -26,7 +22,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     
 }
 
+
+.lowDiv {
+    background-color: var(--background-color);
+}
+
+
+.inputField{
+    color: var(--primary-text-color);
+
+}

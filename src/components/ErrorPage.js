@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/errorPage.css";
 
 const ErrorPage = () => {
+  // handle HTTP errors
   return (
     <div className="error-container">
       <div className="error-content">

@@ -2,10 +2,6 @@ import { fetchAllData, fetchAutoCompleteData } from "../api/api";
 import { apiKey } from "../settings";
 
 export async function getAutocompleteSearch(searchValue) {
-  // const queryParams = {
-  //   apikey: apiKey,
-  //   param2: searchValue,
-  // };
   const response = await fetchAutoCompleteData(
     "locations/v1/cities/autocomplete",
     searchValue

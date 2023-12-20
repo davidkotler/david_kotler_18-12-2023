@@ -1,6 +1,5 @@
 .fiveDayDIsplayCard {
-    /* background-color: #f2f2f2; */
-    /* background-color: var(--background-color); */
+    
    
     display: flex;
     flex-direction: column;
@@ -17,7 +16,7 @@
 .lowerCardDiv {
     
     display: flex;
-    flex-direction: row; /* Corrected from column to row */
+    flex-direction: row; 
     justify-content: space-evenly;
     margin-top: -4px;
     }

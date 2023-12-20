@@ -18,8 +18,6 @@ export async function fetchAllData(path, locationId) {
     return data;
   } catch (error) {
     window.location.href = "/error";
-
-    // throw new Error(`Error fetching data: ${error.message}`);
   }
 }
 
@@ -39,6 +37,5 @@ export async function fetchAutoCompleteData(path, locationName) {
     return data;
   } catch (error) {
     window.location.href = "/error";
-    // throw new Error(`Error fetching data: ${error.message}`);
   }
 }

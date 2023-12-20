@@ -15,7 +15,6 @@ function App() {
     <div className="App" data-theme={isDark ? "dark" : "light"}>
       <ErrorHandler>
         <NavBar changeTheme={handleIsDark} />
-        {/* <MainPage /> */}
 
         <AppRouter />
       </ErrorHandler>
