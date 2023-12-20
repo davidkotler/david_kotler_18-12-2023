@@ -17,6 +17,7 @@ export async function fetchAllData(path, locationId) {
 
     return data;
   } catch (error) {
+    console.log(error);
     window.location.href = "/error";
   }
 }
