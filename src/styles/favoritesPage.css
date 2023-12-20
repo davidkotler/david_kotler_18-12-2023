@@ -5,6 +5,11 @@
     
 }
 
+.cardsDisplay{
+    display: flex;
+    flex-direction: row;
+}
+
 .headerDiv{
     display: flex;
     flex-direction: column;

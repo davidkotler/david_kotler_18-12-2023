@@ -4,25 +4,23 @@ import {
   getFiveDaysForCast,
 } from "../services/weatherApi";
 import { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
+
 import TextField from "@mui/material/TextField";
-import fetchAllData from "../api/api";
+
 import WeatherDisplay from "./WeatherDisplay";
 import "../styles/topHeader.css";
 import CurrentDayWeather from "./CurrentDayWeather";
-import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
 import { defaultAreaId } from "../settings";
 import { getCurrentDayWeather } from "../services/weatherApi";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocationName } from "../redux/slices/locationSlice";
+
 import { setUpdateTime } from "../redux/slices/updateTimeSlice";
 import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
 
 function MainPage() {
   const [weatherDetails, setWeatherDetails] = useState([]);
-  // const [currentDayDetails, setCurrentDayDetails] = useState("");
   const [locationId, setLocationId] = useState(defaultAreaId);
   const [searchedLocationName, setSearchedLocationName] = useState("");
   const [matchedLocations, setMatchedLocations] = useState([]);
@@ -30,56 +28,23 @@ function MainPage() {
   const [locationName, setLocationName] = useState("Tel Aviv");
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   //get deafult area details
-  //   async function getcurrentDay() {
-  //     const details = await getCurrentDayWeather(locationId);
-  //     // setCurrentDayDetails(details);
-  //     dispatch(setCurrentDayDetails(details));
-  //     dispatch(setUpdateTime(new Date().toLocaleTimeString()));
+  useEffect(() => {
+    //get deafult area details
+    async function getcurrentDay() {
+      const details = await getCurrentDayWeather(locationId);
+      // setCurrentDayDetails(details);
+      dispatch(setCurrentDayDetails(details));
+      dispatch(setUpdateTime(new Date().toLocaleTimeString()));
 
-  //     const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
+      const response = await getFiveDaysForCast(locationId); // CHECK THIS LINE LATER !!!!!!!!!!!!!
 
-  //     setWeatherDetails(response);
-  //   }
-  //   getcurrentDay();
-  // }, [generate]);
-
-  // const values = [
-  //   {
-  //     Version: 1,
-  //     Key: "213181",
-  //     Type: "City",
-  //     Rank: 31,
-  //     LocalizedName: "Haifa",
-  //     Country: {
-  //       ID: "IL",
-  //       LocalizedName: "Israel",
-  //     },
-  //     AdministrativeArea: {
-  //       ID: "HA",
-  //       LocalizedName: "Haifa",
-  //     },
-  //   },
-  //   {
-  //     Version: 1,
-  //     Key: "2589281",
-  //     Type: "City",
-  //     Rank: 85,
-  //     LocalizedName: "Haifang Township",
-  //     Country: {
-  //       ID: "CN",
-  //       LocalizedName: "China",
-  //     },
-  //     AdministrativeArea: {
-  //       ID: "SD",
-  //       LocalizedName: "Shandong",
-  //     },
-  //   },
-  // ];
+      setWeatherDetails(response);
+    }
+    getcurrentDay();
+  }, [generate]);
 
   async function handleGetWeather(getForecast) {
-    const matches = await getAutocompleteSearch(locationName);
+    const matches = await getAutocompleteSearch(searchedLocationName);
     console.log(matches);
     if (matches) {
       const matchedNames = matches.map((location) => ({
@@ -109,12 +74,10 @@ function MainPage() {
           value={{ name: searchedLocationName }}
           onInputChange={(event, newValue) => {
             setSearchedLocationName(newValue);
-            // dispatch(setLocationName(newValue));
+
             handleGetWeather(false);
           }}
           onChange={(event, newValue) => {
-            //handleGetWeather(true);
-            // dispatch(setLocationName(newValue));
             if (newValue) {
               setSearchedLocationName(newValue.name);
             }
@@ -124,9 +87,6 @@ function MainPage() {
               {...params}
               placeholder="Type to search..."
               variant="standard"
-              InputProps={{
-                style: { borderBottom: "2px solid #7400b8", color: "#7400b8" },
-              }}
             />
           )}
         />
@@ -134,7 +94,6 @@ function MainPage() {
         <Button
           sx={{ backgroundColor: "#7400b8" }}
           onClick={() => {
-            // dispatch(setLocationName(searchedLocationName));
             setLocationName(searchedLocationName);
             handleGetWeather(true);
           }}

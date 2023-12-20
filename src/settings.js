@@ -3,19 +3,20 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 
 export const apiUrl = "http://dataservice.accuweather.com";
-export const apiKey = "uGaxZEVwWDzY11HuXgT8LPfCpDDR3JYI";
-// export const apiKey = "kUriycj9Nd4CxCKftcouKKGJdyHnulUd";
+// export const apiKey = "uGaxZEVwWDzY11HuXgT8LPfCpDDR3JYI";
+
+export const apiKey = "AAMnwducHSbwpkxD3DqMpPh4ilLpLfUo";
 export const defaultAreaId = 215854;
 
 export const sunnyIcon = (
   <WbSunnyIcon color="secondary" style={{ fontSize: 100, color: "yellow" }} />
 );
 export const cloudyIcon = (
-  <CloudIcon color="primary" style={{ fontSize: 100, color: "white" }} />
+  <CloudIcon color="primary" style={{ fontSize: 100, color: "grey" }} />
 );
 
 export const rainyIcon = (
-  <ThunderstormIcon color="primary" style={{ fontSize: 100, color: "white" }} />
+  <ThunderstormIcon color="primary" style={{ fontSize: 100, color: "grey" }} />
 );
 
 export const backgroundImageUrl =
