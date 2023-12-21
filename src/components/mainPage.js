@@ -4,9 +4,7 @@ import {
   getFiveDaysForCast,
 } from "../services/weatherApi";
 import { useState, useEffect } from "react";
-
 import TextField from "@mui/material/TextField";
-
 import WeatherDisplay from "./WeatherDisplay";
 import "../styles/topHeader.css";
 import CurrentDayWeather from "./CurrentDayWeather";
@@ -15,9 +13,9 @@ import { defaultAreaId } from "../settings";
 import { getCurrentDayWeather } from "../services/weatherApi";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useSelector, useDispatch } from "react-redux";
-
 import { setUpdateTime } from "../redux/slices/updateTimeSlice";
 import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
+import { setLocationName } from "../redux/slices/locationSlice";
 
 function MainPage() {
   const [weatherDetails, setWeatherDetails] = useState([]);
@@ -25,7 +23,7 @@ function MainPage() {
   const [searchedLocationName, setSearchedLocationName] = useState("");
   const [matchedLocations, setMatchedLocations] = useState([]);
   const [generate, setGenerate] = useState(false);
-  const [locationName, setLocationName] = useState("Tel Aviv");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,7 +43,7 @@ function MainPage() {
 
   async function handleGetWeather(getForecast) {
     const matches = await getAutocompleteSearch(searchedLocationName);
-    console.log(matches);
+
     if (matches) {
       const matchedNames = matches.map((location) => ({
         id: location.Key,
@@ -73,6 +71,7 @@ function MainPage() {
           getOptionLabel={(location) => (location.name ? location.name : "")}
           value={{ name: searchedLocationName }}
           onInputChange={(event, newValue) => {
+            console.log(newValue);
             setSearchedLocationName(newValue);
 
             handleGetWeather(false);
@@ -94,7 +93,7 @@ function MainPage() {
         <Button
           sx={{ backgroundColor: "#7400b8" }}
           onClick={() => {
-            setLocationName(searchedLocationName);
+            dispatch(setLocationName(searchedLocationName));
             handleGetWeather(true);
           }}
         >
@@ -103,16 +102,12 @@ function MainPage() {
       </div>
       <div>
         <div className="midDiv">
-          <CurrentDayWeather
-            locationId={locationId}
-            locationName={locationName}
-          />
+          <CurrentDayWeather locationId={locationId} />
         </div>
         <div className="lowDiv">
           <WeatherDisplay
             locationId={locationId}
             apiResponse={weatherDetails}
-            locationName={locationName}
           />
         </div>
       </div>

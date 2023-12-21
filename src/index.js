@@ -10,11 +10,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const darkTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

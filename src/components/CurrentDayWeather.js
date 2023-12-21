@@ -11,8 +11,8 @@ import StarIcon from "@mui/icons-material/Star";
 import { useSelector, useDispatch } from "react-redux";
 import { daysOfWeek } from "../settings";
 
-export default function CurrentDayWeather({ locationId, locationName }) {
-  // const locationName = useSelector((state) => state.locationName.value);
+export default function CurrentDayWeather({ locationId }) {
+  const locationName = useSelector((state) => state.locationName.value);
   const updateTime = useSelector((state) => state.updateTime.value);
   const currentDayDetails = useSelector(
     (state) => state.currentDayDetails.value
@@ -68,7 +68,8 @@ export default function CurrentDayWeather({ locationId, locationName }) {
     };
 
     const isAlreadyInFavorites = existingFavorites.some(
-      (favorite) => favorite.id === locationId
+      (favorite) =>
+        favorite.id === locationId || favorite.locationName === locationName
     );
 
     if (isAlreadyInFavorites) {

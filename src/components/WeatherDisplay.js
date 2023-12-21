@@ -6,8 +6,8 @@ import "../styles/fiveDayDisplayCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import { daysOfWeek } from "../settings";
 
-export default function WeatherDisplay({ apiResponse, locationName }) {
-  // const locationName = useSelector((state) => state.locationName.value);
+export default function WeatherDisplay({ apiResponse }) {
+  const locationName = useSelector((state) => state.locationName.value);
   if (!apiResponse || apiResponse.length === 0) {
     //check if the response is ok or not
     return (
@@ -209,14 +209,12 @@ export default function WeatherDisplay({ apiResponse, locationName }) {
             </CardContent>
             <div className="lowerCardDiv">
               <div className="innerLeftCardDiv">
-                {/* <WbSunnyIcon /> */}
                 <h4>Day</h4>
                 <Typography fontSize="lg" fontWeight="lg">
                   {forecast.Day.IconPhrase}
                 </Typography>
               </div>
               <div className="innerRightCardDiv">
-                {/* <BedtimeIcon /> */}
                 <h4>Night</h4>
                 <Typography fontSize="lg" fontWeight="lg">
                   {forecast.Night.IconPhrase}
