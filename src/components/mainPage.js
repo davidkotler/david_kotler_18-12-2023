@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUpdateTime } from "../redux/slices/updateTimeSlice";
 import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
 import { setLocationName } from "../redux/slices/locationSlice";
+import { setFiveDayForecast } from "../redux/slices/fiveDayForecastSlice";
 
 function MainPage() {
   const [weatherDetails, setWeatherDetails] = useState([]);
@@ -35,24 +36,24 @@ function MainPage() {
       dispatch(setUpdateTime(new Date().toLocaleTimeString()));
 
       const response = await getFiveDaysForCast(locationId);
-
-      setWeatherDetails(response);
+      dispatch(setFiveDayForecast(response));
+      // setWeatherDetails(response);
     }
     getcurrentDay();
   }, [generate]);
 
-  async function handleGetWeather(getForecast) {
-    const matches = await getAutocompleteSearch(searchedLocationName);
-
+  async function handleGetWeather(getForecast, locationName) {
+    const matches = await getAutocompleteSearch(locationName);
+    console.log(matches, "matches");
     if (matches) {
       const matchedNames = matches.map((location) => ({
         id: location.Key,
         name: location.LocalizedName,
       }));
       setMatchedLocations(matchedNames);
-      setLocationId(matches[0].Key);
     }
     if (getForecast) {
+      setLocationId(matches[0].Key);
       setGenerate(true); // trigger use effect
       const response = await getFiveDaysForCast(locationId);
 
@@ -71,12 +72,13 @@ function MainPage() {
           getOptionLabel={(location) => (location.name ? location.name : "")}
           value={{ name: searchedLocationName }}
           onInputChange={(event, newValue) => {
-            console.log(newValue);
+            console.log(newValue, "input");
             setSearchedLocationName(newValue);
 
-            handleGetWeather(false);
+            handleGetWeather(false, newValue);
           }}
           onChange={(event, newValue) => {
+            console.log(newValue, "change");
             if (newValue) {
               setSearchedLocationName(newValue.name);
             }
@@ -94,7 +96,7 @@ function MainPage() {
           sx={{ backgroundColor: "#7400b8" }}
           onClick={() => {
             dispatch(setLocationName(searchedLocationName));
-            handleGetWeather(true);
+            handleGetWeather(true, searchedLocationName);
           }}
         >
           Search
@@ -105,10 +107,7 @@ function MainPage() {
           <CurrentDayWeather locationId={locationId} />
         </div>
         <div className="lowDiv">
-          <WeatherDisplay
-            locationId={locationId}
-            apiResponse={weatherDetails}
-          />
+          <WeatherDisplay />
         </div>
       </div>
     </div>

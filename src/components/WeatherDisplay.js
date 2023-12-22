@@ -6,8 +6,9 @@ import "../styles/fiveDayDisplayCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import { daysOfWeek } from "../settings";
 
-export default function WeatherDisplay({ apiResponse }) {
+export default function WeatherDisplay() {
   const locationName = useSelector((state) => state.locationName.value);
+  const apiResponse = useSelector((state) => state.fivaDayForecast.value);
   if (!apiResponse || apiResponse.length === 0) {
     //check if the response is ok or not
     return (
