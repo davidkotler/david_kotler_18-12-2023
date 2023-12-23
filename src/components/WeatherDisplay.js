@@ -5,10 +5,12 @@ import Typography from "@mui/joy/Typography";
 import "../styles/fiveDayDisplayCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import { daysOfWeek } from "../settings";
+import convertToCelsius from "../services/temperatureConverter";
 
 export default function WeatherDisplay() {
   const locationName = useSelector((state) => state.locationName.value);
   const apiResponse = useSelector((state) => state.fivaDayForecast.value);
+  const temperatureType = useSelector((state) => state.temperatureType.value);
   if (!apiResponse || apiResponse.length === 0) {
     //check if the response is ok or not
     return (
@@ -223,8 +225,15 @@ export default function WeatherDisplay() {
               </div>
             </div>
             <div className="lowestCardDiv">
-              {forecast.Temperature.Minimum.Value}°F -{" "}
-              {forecast.Temperature.Maximum.Value}°F
+              {/* {forecast.Temperature.Minimum.Value}°F -{" "}
+              {forecast.Temperature.Maximum.Value}°F */}
+              {temperatureType === "C"
+                ? `${convertToCelsius(
+                    forecast.Temperature.Minimum.Value
+                  )}°C - ${convertToCelsius(
+                    forecast.Temperature.Maximum.Value
+                  )}°C`
+                : `${forecast.Temperature.Minimum.Value}°F - ${forecast.Temperature.Maximum.Value}°F`}
             </div>
           </Card>
         </div>

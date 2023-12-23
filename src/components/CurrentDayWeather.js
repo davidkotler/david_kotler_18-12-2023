@@ -3,7 +3,7 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import CardActions from "@mui/joy/CardActions";
-
+import { convertToFahrenheit } from "../services/temperatureConverter";
 import Typography from "@mui/joy/Typography";
 import "../styles/currentDayDiv.css";
 import { sunnyIcon, cloudyIcon, rainyIcon } from "../settings";
@@ -14,6 +14,7 @@ import { daysOfWeek } from "../settings";
 export default function CurrentDayWeather({ locationId }) {
   const locationName = useSelector((state) => state.locationName.value);
   const updateTime = useSelector((state) => state.updateTime.value);
+  const temperatureType = useSelector((state) => state.temperatureType.value);
   const currentDayDetails = useSelector(
     (state) => state.currentDayDetails.value
   );
@@ -129,7 +130,14 @@ export default function CurrentDayWeather({ locationId }) {
                 marginBottom: 2,
               }}
             >
-              <h1>{currentDayDetails[0].Temperature.Metric.Value}°C</h1>
+              {/* <h1>{currentDayDetails[0].Temperature.Metric.Value}°C</h1> */}
+              <h1>
+                {temperatureType === "C"
+                  ? `${currentDayDetails[0].Temperature.Metric.Value}°C`
+                  : `${convertToFahrenheit(
+                      currentDayDetails[0].Temperature.Metric.Value
+                    )}°F`}
+              </h1>
             </CardContent>
 
             <CardActions>

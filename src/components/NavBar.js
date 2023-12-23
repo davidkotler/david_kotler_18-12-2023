@@ -4,11 +4,30 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
 import Switch from "@mui/joy/Switch";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setTemperatureType } from "../redux/slices/temperatureTypeSlice";
+import ToggleButton from "@mui/material/ToggleButton";
+import { useState } from "react";
+import ThermostatAutoIcon from "@mui/icons-material/ThermostatAuto";
+import { Height } from "@mui/icons-material";
 
 export default function NavBar({ changeTheme }) {
+  const [selected, setSelected] = useState(false);
+  const dispatch = useDispatch();
+
+  const temperatureType = useSelector((state) => state.temperatureType.value);
+
+  const handleTemperatureChange = () => {
+    if (temperatureType == "C") {
+      setSelected(true);
+      dispatch(setTemperatureType("F"));
+    } else {
+      setSelected(false);
+      dispatch(setTemperatureType("C"));
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: "#ffffff" }}>
@@ -20,6 +39,13 @@ export default function NavBar({ changeTheme }) {
           >
             Weather App
           </Typography>
+          <ToggleButton
+            value="check"
+            selected={selected}
+            onChange={handleTemperatureChange}
+          >
+            <ThermostatAutoIcon />
+          </ToggleButton>
           <Switch onChange={changeTheme} />
 
           <Button
