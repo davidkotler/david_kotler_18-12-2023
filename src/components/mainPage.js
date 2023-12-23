@@ -56,7 +56,6 @@ function MainPage() {
       setLocationId(matches[0].Key);
       setGenerate(true); // trigger use effect
       const response = await getFiveDaysForCast(locationId);
-
       setWeatherDetails(response);
       setGenerate(false);
     }
