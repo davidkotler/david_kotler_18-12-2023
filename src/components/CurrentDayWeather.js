@@ -8,7 +8,7 @@ import Typography from "@mui/joy/Typography";
 import "../styles/currentDayDiv.css";
 import { sunnyIcon, cloudyIcon, rainyIcon } from "../settings";
 import StarIcon from "@mui/icons-material/Star";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { daysOfWeek } from "../settings";
 
 export default function CurrentDayWeather({ locationId }) {
@@ -20,41 +20,12 @@ export default function CurrentDayWeather({ locationId }) {
   );
 
   if (!currentDayDetails || currentDayDetails.length === 0) {
-    /// ADD THIS WHEN FINISH !!! IT WORKS JUST MAKE AN API CALLS
-    //check if the details not available
     return (
       <div>
         <h1>Data not available right now !</h1>
       </div>
     );
   }
-
-  // const currentDayDetails = [
-  //   {
-  //     LocalObservationDateTime: "2023-12-14T17:32:00+02:00",
-  //     EpochTime: 1702567920,
-  //     WeatherText: "Partly rain",
-  //     WeatherIcon: 35,
-  //     HasPrecipitation: false,
-  //     PrecipitationType: null,
-  //     IsDayTime: false,
-  //     Temperature: {
-  //       Metric: {
-  //         Value: 20,
-  //         Unit: "C",
-  //         UnitType: 17,
-  //       },
-  //       Imperial: {
-  //         Value: 68,
-  //         Unit: "F",
-  //         UnitType: 18,
-  //       },
-  //     },
-  //     MobileLink:
-  //       "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
-  //     Link: "http://www.accuweather.com/en/il/haifa/213181/current-weather/213181?lang=en-us",
-  //   },
-  // ];
 
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const handleAddToFavorites = () => {
@@ -130,7 +101,6 @@ export default function CurrentDayWeather({ locationId }) {
                 marginBottom: 2,
               }}
             >
-              {/* <h1>{currentDayDetails[0].Temperature.Metric.Value}°C</h1> */}
               <h1>
                 {temperatureType === "C"
                   ? `${currentDayDetails[0].Temperature.Metric.Value}°C`

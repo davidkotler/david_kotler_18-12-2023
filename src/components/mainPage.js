@@ -12,7 +12,7 @@ import Button from "@mui/joy/Button";
 import { defaultAreaId } from "../settings";
 import { getCurrentDayWeather } from "../services/weatherApi";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUpdateTime } from "../redux/slices/updateTimeSlice";
 import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
 import { setLocationName } from "../redux/slices/locationSlice";
@@ -40,7 +40,7 @@ function MainPage() {
       // setWeatherDetails(response);
     }
     getcurrentDay();
-  }, [generate]);
+  }, [dispatch, locationId]);
 
   async function handleGetWeather(getForecast, locationName) {
     const matches = await getAutocompleteSearch(locationName);

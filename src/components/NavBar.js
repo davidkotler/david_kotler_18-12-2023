@@ -12,6 +12,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import { useState } from "react";
 import ThermostatAutoIcon from "@mui/icons-material/ThermostatAuto";
 import { Height } from "@mui/icons-material";
+import { height } from "@mui/system";
 
 export default function NavBar({ changeTheme }) {
   const [selected, setSelected] = useState(false);
@@ -43,8 +44,9 @@ export default function NavBar({ changeTheme }) {
             value="check"
             selected={selected}
             onChange={handleTemperatureChange}
+            sx={{ width: "24px", height: "10px" }}
           >
-            <ThermostatAutoIcon />
+            <ThermostatAutoIcon sx={{ fontSize: "18px" }} />
           </ToggleButton>
           <Switch onChange={changeTheme} />
 

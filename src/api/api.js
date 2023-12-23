@@ -1,6 +1,5 @@
 import React from "react";
 import { apiUrl, apiKey } from "../settings";
-import { useHistory } from "react-router-dom";
 
 export async function fetchAllData(path, locationId) {
   try {
