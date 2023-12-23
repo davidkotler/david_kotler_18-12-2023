@@ -1,6 +1,6 @@
 .fiveDayDIsplayCard {
     
-   
+    background-color: var(--background-color) !important;
     display: flex;
     flex-direction: column;
 }

@@ -13,7 +13,6 @@ export const currentDayDetailsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setCurrentDayDetails } = currentDayDetailsSlice.actions;
 
 export default currentDayDetailsSlice.reducer;

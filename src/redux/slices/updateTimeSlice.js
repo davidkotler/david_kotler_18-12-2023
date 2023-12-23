@@ -13,7 +13,6 @@ export const updateSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setUpdateTime } = updateSlice.actions;
 
 export default updateSlice.reducer;

@@ -1,7 +1,8 @@
 
 
  .card {
-    background-color: white !important;
+    
+    background-color: var(--background-color) !important;
     margin: 10px !important;
     padding: 10px !important;
     border: 1px solid #6930c3 !important;
@@ -31,7 +32,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    backgroundColor: hsl(256, 56%, 89%) !important;
+    
+    background-color: var(--background-color) !important;
     margin: 10px !important;
     padding: 10px !important;
     border: 1px solid #6930c3 !important;
