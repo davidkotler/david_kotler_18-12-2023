@@ -19,11 +19,9 @@ import { setLocationName } from "../redux/slices/locationSlice";
 import { setFiveDayForecast } from "../redux/slices/fiveDayForecastSlice";
 
 function MainPage() {
-  // const [weatherDetails, setWeatherDetails] = useState([]);
   const [locationId, setLocationId] = useState(defaultAreaId);
   const [searchedLocationName, setSearchedLocationName] = useState("");
   const [matchedLocations, setMatchedLocations] = useState([]);
-  // const [generate, setGenerate] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,7 +35,6 @@ function MainPage() {
 
       const response = await getFiveDaysForCast(locationId);
       dispatch(setFiveDayForecast(response));
-      // setWeatherDetails(response);
     }
     getcurrentDay();
   }, [dispatch, locationId]);
@@ -54,10 +51,6 @@ function MainPage() {
     }
     if (getForecast) {
       setLocationId(matches[0].Key);
-      // setGenerate(true); // trigger use effect
-      // const response = await getFiveDaysForCast(locationId);
-      // setWeatherDetails(response);
-      // setGenerate(false);
     }
   }
 

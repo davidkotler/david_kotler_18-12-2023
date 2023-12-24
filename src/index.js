@@ -6,8 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

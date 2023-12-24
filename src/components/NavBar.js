@@ -11,8 +11,6 @@ import { setTemperatureType } from "../redux/slices/temperatureTypeSlice";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useState } from "react";
 import ThermostatAutoIcon from "@mui/icons-material/ThermostatAuto";
-import { Height } from "@mui/icons-material";
-import { height } from "@mui/system";
 
 export default function NavBar({ changeTheme }) {
   const [selected, setSelected] = useState(false);
@@ -21,7 +19,7 @@ export default function NavBar({ changeTheme }) {
   const temperatureType = useSelector((state) => state.temperatureType.value);
 
   const handleTemperatureChange = () => {
-    if (temperatureType == "C") {
+    if (temperatureType === "C") {
       setSelected(true);
       dispatch(setTemperatureType("F"));
     } else {

@@ -20,11 +20,11 @@ const FavoritesPage = () => {
   return (
     <div className="favoritersContainer">
       <div className="headerDiv">
-        <h1>Your Favorites</h1>
+        <h1 style={{ color: "#7400b8" }}>Your Favorites</h1>
       </div>
 
       {favorites.length === 0 ? (
-        <p>No favorites added yet.</p>
+        <p style={{ color: "#7400b8" }}>No favorites added yet.</p>
       ) : (
         <div className="cardsDisplay">
           {favorites.map((favorite, index) => (
