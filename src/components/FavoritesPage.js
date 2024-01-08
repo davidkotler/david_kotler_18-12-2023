@@ -4,19 +4,28 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteFavoriteById } from "../redux/slices/favoritesSlicre";
+import { convertToFahrenheit } from "../services/temperatureConverter";
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || [] // get favorite locations from storage
-  );
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.value);
+  const temperatureType = useSelector((state) => state.temperatureType.value);
 
+  // const [favorites, setFavorites] = useState(
+  //   JSON.parse(localStorage.getItem("favorites")) || [] // get favorite locations from storage
+  // );
+
+  // const handleDelete = (id) => {
+  //   const updatedFavorites = favorites.filter((favorite) => favorite.id !== id);
+
+  //   setFavorites(updatedFavorites);
+  //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  // };
   const handleDelete = (id) => {
-    const updatedFavorites = favorites.filter((favorite) => favorite.id !== id);
-
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    dispatch(deleteFavoriteById(id));
   };
-
   return (
     <div className="favoritersContainer">
       <div className="headerDiv">
@@ -36,7 +45,10 @@ const FavoritesPage = () => {
 
                 <CardContent>
                   <Typography variant="body1">
-                    Temperature: {favorite.temperature}°C
+                    Temperature:{" "}
+                    {temperatureType === "C"
+                      ? `${favorite.temperature}°C`
+                      : `${convertToFahrenheit(favorite.temperature)}°F`}
                   </Typography>
                 </CardContent>
                 <CardContent>
@@ -45,7 +57,10 @@ const FavoritesPage = () => {
                   </Typography>
                 </CardContent>
 
-                <DeleteIcon onClick={() => handleDelete(favorite.id)} />
+                <DeleteIcon
+                  onClick={() => dispatch(deleteFavoriteById(favorite.id))}
+                />
+                {/* <DeleteIcon /> */}
               </CardContent>
             </Card>
           ))}

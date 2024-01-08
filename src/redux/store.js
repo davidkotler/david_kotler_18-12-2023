@@ -4,6 +4,7 @@ import updateReducer from "./slices/updateTimeSlice";
 import currentDayDetailsReducer from "./slices/currentDayDetails";
 import fiveDayForecastReducer from "./slices/fiveDayForecastSlice";
 import temperatureTypeReducer from "./slices/temperatureTypeSlice";
+import favoritesReducer from "./slices/favoritesSlicre";
 export const store = configureStore({
   reducer: {
     locationName: locationReducer,
@@ -11,5 +12,6 @@ export const store = configureStore({
     currentDayDetails: currentDayDetailsReducer,
     fivaDayForecast: fiveDayForecastReducer,
     temperatureType: temperatureTypeReducer,
+    favorites: favoritesReducer,
   },
 });

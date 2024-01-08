@@ -17,6 +17,7 @@ import { setUpdateTime } from "../redux/slices/updateTimeSlice";
 import { setCurrentDayDetails } from "../redux/slices/currentDayDetails";
 import { setLocationName } from "../redux/slices/locationSlice";
 import { setFiveDayForecast } from "../redux/slices/fiveDayForecastSlice";
+import theme from "../styles/theme";
 
 function MainPage() {
   const [locationId, setLocationId] = useState(defaultAreaId);
@@ -39,6 +40,31 @@ function MainPage() {
     getcurrentDay();
   }, [dispatch, locationId]);
 
+  useEffect(() => {
+    // manage the debounce of the auto complete
+    const timeOut = setTimeout(() => {
+      async function handleGetWeather(getForecast, locationName) {
+        const matches = await getAutocompleteSearch(searchedLocationName);
+        console.log(matches, "matches");
+        if (matches) {
+          const matchedNames = matches.map((location) => ({
+            id: location.Key,
+            name: location.LocalizedName,
+          }));
+          setMatchedLocations(matchedNames);
+        }
+        if (getForecast) {
+          setLocationId(matches[0].Key);
+        }
+      }
+      handleGetWeather();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [searchedLocationName]);
+
   async function handleGetWeather(getForecast, locationName) {
     const matches = await getAutocompleteSearch(locationName);
     console.log(matches, "matches");
@@ -55,7 +81,10 @@ function MainPage() {
   }
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{ background: theme.palette.background.default }}
+    >
       <div className="upperDiv" spacing={1} sx={{ width: 300 }}>
         <Autocomplete
           style={{ width: 300, marginTop: 13 }}
@@ -67,7 +96,7 @@ function MainPage() {
             console.log(newValue, "input");
             setSearchedLocationName(newValue);
 
-            handleGetWeather(false, newValue);
+            // handleGetWeather(false, newValue);
           }}
           onChange={(event, newValue) => {
             console.log(newValue, "change");
@@ -95,10 +124,16 @@ function MainPage() {
         </Button>
       </div>
       <div>
-        <div className="midDiv">
+        <div
+          className="midDiv"
+          style={{ background: theme.palette.background.default }}
+        >
           <CurrentDayWeather locationId={locationId} />
         </div>
-        <div className="lowDiv">
+        <div
+          className="lowDiv"
+          style={{ background: theme.palette.background.default }}
+        >
           <WeatherDisplay />
         </div>
       </div>

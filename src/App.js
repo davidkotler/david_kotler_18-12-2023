@@ -3,21 +3,28 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import AppRouter from "./AppRouter";
 import ErrorHandler from "./components/ErrorHandler";
-function App() {
-  const [isDark, setIsDark] = useState(false);
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./styles/theme";
 
-  const handleIsDark = () => {
-    setIsDark(!isDark);
-  };
+function App() {
+  // const [isDark, setIsDark] = useState(false);
+
+  // const handleIsDark = () => {
+  //   setIsDark(!isDark);
+  // };
 
   return (
-    <div className="App" data-theme={isDark ? "dark" : "light"}>
-      <ErrorHandler>
-        <NavBar changeTheme={handleIsDark} />
+    // <div className="App" data-theme={isDark ? "dark" : "light"}>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <ErrorHandler>
+          {/* <NavBar changeTheme={handleIsDark} /> */}
+          <NavBar />
 
-        <AppRouter />
-      </ErrorHandler>
-    </div>
+          <AppRouter />
+        </ErrorHandler>
+      </div>
+    </ThemeProvider>
   );
 }
 

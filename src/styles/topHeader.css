@@ -1,5 +1,5 @@
 .container {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     display: flex;
     flex-direction: column;
     height: 30vh;
@@ -18,7 +18,7 @@
   
 }
 .midDiv {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@
 
 
 .lowDiv {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
 }
 
 
